@@ -176,10 +176,10 @@ def load_data():
 
 
 @st.cache_data(show_spinner=False)
-def build_utility_matrix(ratings: pd.DataFrame, min_user_ratings=20, min_movie_ratings=20):
+def build_utility_matrix(ratings: pd.DataFrame, min_user_ratings=50, min_movie_ratings=50):
     """
     Filter to active users / popular movies and build the utility matrix.
-    Lower thresholds than the notebook (20 vs 50) so more movies appear.
+    Thresholds set to 50 to keep matrix small enough for Streamlit Cloud (1GB RAM).
     """
     rc = ratings["movieId"].value_counts()
     popular = rc[rc >= min_movie_ratings].index
@@ -552,10 +552,10 @@ if needs_user and user_id_input:
 
     with st.expander(f"User {user_id_input}'s top-rated movies ({len(rated_by_user)} total in filtered set)", expanded=False):
         top_rated = rated_by_user.head(10)[["title", "genres", "rating"]]
-        st.dataframe(top_rated, use_container_width=True, hide_index=True)
+        st.dataframe(top_rated, width=None, hide_index=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
-run_btn = st.button("Get Recommendations", use_container_width=True, type="primary")
+run_btn = st.button("Get Recommendations", use_container_width=False, type="primary")
 
 st.markdown("---")
 
