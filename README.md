@@ -1,4 +1,4 @@
-# CineMatch — Hybrid Movie Recommender
+# HybridLens — Hybrid Movie Recommender
 
 A Streamlit app combining **user-based CF**, **item-based CF**, and **content-based filtering** on the MovieLens ml-latest-small dataset.
 
